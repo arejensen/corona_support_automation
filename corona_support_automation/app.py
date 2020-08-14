@@ -103,6 +103,14 @@ def dump(data, output_directory, output_filename):
     help="To date in ISO 8601-ish format (%Y-m%-%d: 2020-08-01)",
 )
 def app(output_directory, output_filename, from_date, to_date):
+
+    # In windows, if you end the directory name with '\', the next character, typically the end of string character "
+    # or ', will be passed to click as a literal character. This would make a path like:
+    # 'C:\Users\user1\' into "C:\Users\user1'" <-- notice the ' before "
+    # Check for this, and remove if necessary
+    if output_directory[-1] in ["'", '"']:
+        output_directory = output_directory[:-1]
+
     if not os.path.isdir(output_directory):
         click.echo(f"{output_directory} is not a valid output directory")
         return 1
