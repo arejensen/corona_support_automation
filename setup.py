@@ -34,7 +34,7 @@ setup(
     description="Automates data collection from the Norwegian Corona / SARS-CoV-2 business support system",
     entry_points={
         'console_scripts': [
-            'corona_support_automation=corona_support_automation.cli:__main__',
+            'corona_support_automation=corona_support_automation.app:app',
         ],
     },
     install_requires=requirements,
